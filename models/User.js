@@ -18,6 +18,9 @@ const UsersSchema = new mongoose.Schema(
     role: {
       type: String,
     },
+    isVerified:{
+      type:String
+    }
 },
 );
 
