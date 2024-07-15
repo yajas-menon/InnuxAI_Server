@@ -16,7 +16,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 // db connection
 connectDB = mongoose
   .connect(
-    "mongodb+srv://menoniyajas:Mh02g2913@cluster0.ftwbun3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    process.env.MONGO_URI
   )
   .then(console.log("DB Connected Succesfully...."))
   .catch((err) => {
