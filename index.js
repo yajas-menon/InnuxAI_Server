@@ -29,13 +29,16 @@ app.get('/', (req, res) => {
   res.send('Hello from the backend!');
 });
 
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
 //Router middleware 
 const authRoutes = require('./authentication/userRoutes');
+const vendorRoute=require('./authentication/vendorRoute');
 
 // Use middle ware 
 
 app.use('/api/auth', authRoutes);
+app.use('/api/auth',vendorRoute)
