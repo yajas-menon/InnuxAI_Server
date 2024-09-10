@@ -37,9 +37,11 @@ app.listen(port, () => {
 //Router middleware 
 const authRoutes = require('./authentication/userRoutes');
 const vendorRoute=require('./authentication/vendorRoute');
+const clauseRoute= require('./authentication/clauseRoutes');
 
 // Use middle ware 
 
 app.use('/api/auth', authRoutes);
-app.use('/api/auth',vendorRoute)
+app.use('/api/auth',vendorRoute);
+app.use('/api/auth',clauseRoute);
 
