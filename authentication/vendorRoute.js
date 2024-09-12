@@ -28,7 +28,7 @@ router.post('/vendors', async (req, res) => {
     }
   });
 
-  router.get('/getvendors', async (req, res) => {
+  router.get('/getallvendors', async (req, res) => {
     try {
       const vendors = await Vendor.find({});
       res.status(200).json(vendors);
@@ -69,6 +69,15 @@ router.post('/vendors', async (req, res) => {
     }
   });
 
+
+  router.get('/get_vendors', async (req, res) => {
+    try {
+      const vendors = await Vendor.find({}, 'vendorName email'); // Fetch vendorName and email only
+      res.json(vendors);
+    } catch (error) {
+      res.status(500).json({ message: 'Error fetching vendors', error });
+    }
+  });
   
 
 //   router.patch('/acceptvendors/:id/accept', async (req, res) => {
