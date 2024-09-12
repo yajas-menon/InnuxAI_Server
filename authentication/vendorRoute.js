@@ -121,6 +121,34 @@ const transporter = nodemailer.createTransport({
     return crypto.randomBytes(8).toString('hex');
   };
 
+  
+  router.post('/send-email', async (req, res) => {
+    const { content, recipientEmail } = req.body;
+  
+    // Basic validation
+    if (!content || !recipientEmail) {
+      return res.status(400).json({ message: 'Content and recipient email are required.' });
+    }
+  
+    // Email options
+    const mailOptions = {
+      from: process.env.EMAIL_USER, // Sender email address
+      to: recipientEmail, // Recipient email address
+      subject: 'Document from Vendor Portal', // Subject of the email
+      html: content, // HTML content (the document)
+    };
+  
+    try {
+      // Send the email using nodemailer
+      await transporter.sendMail(mailOptions);
+      res.json({ message: 'Email sent successfully!' });
+    } catch (error) {
+      console.error('Error sending email:', error);
+      res.status(500).json({ message: 'Failed to send email.', error });
+    }
+  });
+
+
   router.patch('/acceptvendors/:id/accept', async (req, res) => {
     try {
       const vendor = await Vendor.findById(req.params.id);
