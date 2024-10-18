@@ -6,9 +6,8 @@ const router = express.Router();
 // Route to add a new user-defined clause
 router.post('/add_clause', async (req, res) => {
   try {
-    const { title, content, userId } = req.body;
+    const { content, userId } = req.body;
     const newClause = new Clause({
-      title,
       content,
     });
     await newClause.save();
